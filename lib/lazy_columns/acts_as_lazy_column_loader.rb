@@ -26,21 +26,13 @@ module LazyColumns
 
       def define_lazy_load_method_for(column)
         define_method column do
-          self.reload select: column
+          self.reload(select: column)
           read_attribute column
         end
       end
     end
   end
 end
-
-#module ActiveRecord
-#  class Base
-#    def self.lazy_load(comments)
-#      "ADIOS"
-#    end
-#  end
-#end
 
 if ActiveRecord::Base.respond_to?(:lazy_load)
   $stderr.puts "ERROR: Method `.lazy_load` already defined in `ActiveRecord::Base`. This is incompatible with LazyColumns and the plugin will be disabled."
