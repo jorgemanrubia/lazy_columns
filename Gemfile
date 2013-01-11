@@ -6,7 +6,6 @@ source "http://rubygems.org"
 gemspec
 
 # jquery-rails is used by the dummy application
-gem "jquery-rails"
 gem 'rspec', '~>2.12.0'
 gem "rspec-rails", '~>2.12.0'
 

@@ -11,12 +11,14 @@ Gem::Specification.new do |s|
   s.email       = ["jorge.manrubia@gmail.com"]
   s.homepage    = "https://github.com/jorgemanrubia/lazy_columns"
   s.summary     = "Rails plugin that let you configure ActiveRecord columns to be loaded lazily"
-  s.description = "Rails plugin that let you configure ActiveRecord columns to be loaded lazily"
+  s.description = "This plugin lets you define specific columns in ActiveRecord models to be loaded lazily"
 
   s.files = Dir["{app,config,db,lib}/**/*"] + ["MIT-LICENSE", "Rakefile", "README.rdoc"]
   s.test_files = Dir["spec/**/*"]
 
   s.add_dependency "rails", "~> 3.2.10"
 
-  s.add_development_dependency "sqlite3"
+  s.add_development_dependency 'sqlite3'
+  s.add_development_dependency '~>2.12.0'
+  s.add_development_dependency '~>2.12.0'
 end
