@@ -17,7 +17,7 @@ module LazyColumns
       end
 
       def exclude_columns_from_default_scope(columns)
-        default_scope select((column_names - columns).map { |column_name| "`#{table_name}`.`#{column_name}`" })
+        default_scope select((column_names - columns).map { |column_name| "#{table_name}.#{column_name}" })
       end
 
       def make_columns_lazy_loadable(columns)
