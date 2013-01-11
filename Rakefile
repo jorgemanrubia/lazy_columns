@@ -20,19 +20,13 @@ RDoc::Task.new(:rdoc) do |rdoc|
   rdoc.rdoc_files.include('lib/**/*.rb')
 end
 
-
-
-
 Bundler::GemHelper.install_tasks
 
-require 'rake/testtask'
+require "rspec/core/rake_task"
 
-Rake::TestTask.new(:test) do |t|
-  t.libs << 'lib'
-  t.libs << 'spec'
-  t.pattern = 'spec/**/*_spec.rb'
-  t.verbose = false
+RSpec::Core::RakeTask.new(:spec) do |spec|
+  spec.pattern = 'spec/**/*_spec.rb'
+  spec.rspec_opts = ['--backtrace']
 end
 
-
-task :default => :test
+task :default => :spec

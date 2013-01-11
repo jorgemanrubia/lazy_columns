@@ -111,6 +111,6 @@ PLATFORMS
 DEPENDENCIES
   jquery-rails
   lazy_columns!
-  rspec (= 2.12.0)
-  rspec-rails (= 2.12.0)
+  rspec (~> 2.12.0)
+  rspec-rails (~> 2.12.0)
   sqlite3
