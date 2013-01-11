@@ -26,7 +26,7 @@ module LazyColumns
 
       def define_lazy_load_method_for(column)
         define_method column do
-          self.reload(select: column)
+          self.reload(select: column) unless has_attribute?(column)
           read_attribute column
         end
       end
