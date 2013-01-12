@@ -4,6 +4,7 @@ module LazyColumns
 
     module ClassMethods
       def lazy_load(column_or_columns)
+        return unless table_exists?
         lazy_columns = as_array_of_strings column_or_columns
         exclude_columns_from_default_scope lazy_columns
         make_columns_lazy_loadable lazy_columns
