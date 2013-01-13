@@ -33,7 +33,7 @@ end
 if ActiveRecord::Base.respond_to?(:lazy_load)
   $stderr.puts "ERROR: Method `.lazy_load` already defined in `ActiveRecord::Base`. This is incompatible with LazyColumns and the plugin will be disabled."
 else
-  include LazyColumns::ActsAsLazyColumnLoader
+  ActiveRecord::Base.send :include, LazyColumns::ActsAsLazyColumnLoader
 end
 
 
