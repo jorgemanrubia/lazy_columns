@@ -19,6 +19,27 @@ describe LazyColumns::ActsAsLazyColumnLoader do
       @action.should_not_receive :reload
       @action.comments
     end
+
+    it "should not reload the object if after the column was fetched" do
+      @action.comments
+      @action.should_not_receive :reload
+      @action.comments
+    end
+
+    it "should let you define the attribute when creating the object" do
+      @action = Action.create!(comments: "some new comments")
+      @action.comments.should == "some new comments"
+    end
+
+    it "should let you update the attribute using #update_attribute" do
+      @action.update_attribute(:comments, "some new comments")
+      @action.comments.should == "some new comments"
+    end
+
+    it "should let you update the attribute using #update_attributes" do
+      @action.update_attributes(comments: "some new comments")
+      @action.comments.should == "some new comments"
+    end
   end
 
   def create_and_reload_action_from_db
