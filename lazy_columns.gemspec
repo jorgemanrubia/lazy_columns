@@ -13,7 +13,7 @@ Gem::Specification.new do |s|
   s.summary     = "Rails plugin that let you configure ActiveRecord columns to be loaded lazily"
   s.description = "This plugin lets you define specific columns in ActiveRecord models to be loaded lazily"
 
-  s.files = Dir["{app,config,db,lib}/**/*"] + ["MIT-LICENSE", "Rakefile", "README.rdoc"]
+  s.files = Dir["{app,config,db,lib}/**/*"] + ["MIT-LICENSE", "Rakefile", "README.md"]
   s.test_files = Dir["spec/**/*"]
 
   s.add_dependency "rails", "~> 3.2.10"
