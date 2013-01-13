@@ -4,7 +4,7 @@ lazy_columns is a Rails plugin that lets you specify columns to be loaded lazily
 
 By default, Active Records loads all the columns in each model instance. This plugin lets you specify columns to be excluded by default. It is intended for scenarios where you have large attributes and don't want to load them in every operation because of performance.
 
-Notice that a much better approach is moving those columns to new models, since Rails loads related models lazily by default. This plugin can be used as an easy workaround while you decide to do that change. 
+Notice that a much better approach is moving those columns to new models, since Rails loads related models lazily by default. This plugin is an easy workaround. 
 
 ## Installation
 
@@ -16,7 +16,7 @@ gem 'lazy_columns'
 
 ## Usage
 
-Use `lazy_load` in your Active Record models to define which column or columns are meant to be loaded lazily:
+Use `lazy_load` in your Active Record models to define which column or columns should be loaded lazily:
 
 ```ruby
 class Action < ActiveRecord::Base
