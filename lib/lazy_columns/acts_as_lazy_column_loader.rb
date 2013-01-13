@@ -7,7 +7,7 @@ module LazyColumns
         return unless table_exists?
         columns = columns.collect(&:to_s)
         exclude_columns_from_default_scope columns
-        make_columns_lazy_loadable columns
+        define_lazy_accessors_for columns
       end
 
       private
@@ -16,11 +16,11 @@ module LazyColumns
         default_scope select((column_names - columns).map { |column_name| "#{table_name}.#{column_name}" })
       end
 
-      def make_columns_lazy_loadable(columns)
-        columns.each { |column| define_lazy_load_method_for column }
+      def define_lazy_accessors_for(columns)
+        columns.each { |column| define_lazy_accessor_for column }
       end
 
-      def define_lazy_load_method_for(column)
+      def define_lazy_accessor_for(column)
         define_method column do
           self.reload(select: column) unless has_attribute?(column)
           read_attribute column
