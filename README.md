@@ -1,10 +1,10 @@
 # lazy_columns
 
-`lazy_columns` is a Rails plugin that lets you specify columns to be loaded lazily in your Active Record models.
+lazy_columns is a Rails plugin that lets you specify columns to be loaded lazily in your Active Record models.
 
 By default, Active Records loads all the columns in each model instance. This plugin lets you specify columns to be excluded by default. It is intended for scenarios where you have large attributes and don't want to load them in every operation because of performance.
 
-Notice that a much better approach is moving those columns to new models, since Rails loads related models lazily by default. This plugin can be used as an easy workaround while you decide to do that change :). 
+Notice that a much better approach is moving those columns to new models, since Rails loads related models lazily by default. This plugin can be used as an easy workaround while you decide to do that change. 
 
 ## Installation
 
@@ -44,12 +44,12 @@ action # => <Action id: 1, title: "Some action", comments: "Some comments"
 
 This plugin does two things:
 
-- Modify the [default scope](http://apidock.com/rails/ActiveRecord/Base/default_scope/class) of the model so that it fetches all the attributes but the excluded ones.
+- Modify the [default scope](http://apidock.com/rails/ActiveRecord/Base/default_scope/class) of the model so that it fetches all the attributes except the marked as lazy.
 - Define an accessor method per lazy attribute that will reload the corresponding column under demand.
 
 ### Eager loading of attributes defined as lazy
 
-The first time you try to access a lazy attribute a new database query will be triggered to load it. If you are going to operate on a number of objects and want to have the lazy attributes eagerly loaded use Active Record `.select()` in the initial query. For example:
+The first time you access a lazy attribute a new database query will be executed to load it. If you are going to operate on a number of objects and want to have the lazy attributes eagerly loaded use Active Record `.select()` in the initial query. For example:
 
 ```ruby
 Action.select(:comments).all 
