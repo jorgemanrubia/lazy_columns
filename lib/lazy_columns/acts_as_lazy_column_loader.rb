@@ -3,19 +3,14 @@ module LazyColumns
     extend ActiveSupport::Concern
 
     module ClassMethods
-      def lazy_load(column_or_columns)
+      def lazy_load(*columns)
         return unless table_exists?
-        lazy_columns = as_array_of_strings column_or_columns
-        exclude_columns_from_default_scope lazy_columns
-        make_columns_lazy_loadable lazy_columns
+        columns = columns.collect(&:to_s)
+        exclude_columns_from_default_scope columns
+        make_columns_lazy_loadable columns
       end
 
       private
-
-      def as_array_of_strings(element_or_elements)
-        array = element_or_elements.respond_to?(:each) ? element_or_elements : [element_or_elements]
-        array.collect(&:to_s)
-      end
 
       def exclude_columns_from_default_scope(columns)
         default_scope select((column_names - columns).map { |column_name| "#{table_name}.#{column_name}" })

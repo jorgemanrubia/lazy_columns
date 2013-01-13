@@ -7,7 +7,7 @@ describe LazyColumns::ActsAsLazyColumnLoader do
 
   describe "#lazy_column" do
     it "excludes single column from active record objects" do
-      @action.has_attribute?(:comments).should_not == "The action should not contain the lazy :comments attribute"
+      @action.has_attribute?(:comments).should be_false
     end
 
     it "loads column when requested" do
@@ -40,9 +40,25 @@ describe LazyColumns::ActsAsLazyColumnLoader do
       @action.update_attributes(comments: "some new comments")
       @action.comments.should == "some new comments"
     end
+
+    it "should let you define multiple lazy columns at the same time" do
+      @action = create_and_reload_action_from_db(ActionWith2LazyColumns)
+      @action.has_attribute?(:comments).should be_false
+      @action.has_attribute?(:title).should be_false
+      @action.title.should == "some action"
+      @action.comments.should == "some comments"
+    end
   end
 
-  def create_and_reload_action_from_db
-    Action.find Action.create(title: "some action", comments: "some comments")
+  def create_and_reload_action_from_db(klass=Action)
+    klass.find Action.create(title: "some action", comments: "some comments")
+  end
+
+  class ActionWith2LazyColumns < ActiveRecord::Base
+    self.table_name = "actions"
+
+    lazy_load :comments, :title
+
+    attr_accessible :comments, :title
   end
 end
