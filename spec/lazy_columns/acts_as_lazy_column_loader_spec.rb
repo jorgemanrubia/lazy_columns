@@ -20,7 +20,7 @@ describe LazyColumns::ActsAsLazyColumnLoader do
       @action.comments
     end
 
-    it "should not reload the object if after the column was fetched" do
+    it "should not reload the object after the column was fetched" do
       @action.comments
       @action.should_not_receive :reload
       @action.comments
@@ -47,6 +47,13 @@ describe LazyColumns::ActsAsLazyColumnLoader do
       @action.has_attribute?(:title).should be_false
       @action.title.should == "some action"
       @action.comments.should == "some comments"
+    end
+
+    it "should let you modify normal attributes" do
+      @action.title = 'some new title'
+      @action.comments
+      @action.save!
+      @action.reload.title.should == 'some new title'
     end
   end
 

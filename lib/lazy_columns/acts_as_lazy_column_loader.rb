@@ -22,7 +22,11 @@ module LazyColumns
 
       def define_lazy_accessor_for(column)
         define_method column do
-          self.reload(select: column) unless has_attribute?(column)
+          unless has_attribute?(column)
+            changes_before_reload = self.changes.clone
+            self.reload
+            changes_before_reload.each{|attribute_name, values| self.send("#{attribute_name}=", values[1])}
+          end
           read_attribute column
         end
       end
