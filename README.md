@@ -29,7 +29,7 @@ end
 Now, when you fetch some action the comments are not loaded:
 
 ```ruby
-Action.create(:title=>"Some action", :comments=>"Some comments") # => <Action id: 1...>
+Action.create(title: "Some action", comments: "Some comments") # => <Action id: 1...>
 action = Action.find(1) # => <Action id: 1, title: "Some action">
 ```
 
