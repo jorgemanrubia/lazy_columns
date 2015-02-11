@@ -8,5 +8,4 @@ spec/dummy/.sass-cache
 .idea
 .DS_Store
 Gemfile.lock
-
-
+gemfiles/

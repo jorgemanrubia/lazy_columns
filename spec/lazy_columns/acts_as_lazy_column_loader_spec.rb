@@ -64,7 +64,7 @@ describe LazyColumns::ActsAsLazyColumnLoader do
   end
 
   def create_and_reload_action_from_db(klass=Action)
-    klass.find Action.create(title: "some action", comments: "some comments")
+    klass.find Action.create(title: "some action", comments: "some comments").id
   end
 
   class ActionWith2LazyColumns < ActiveRecord::Base
